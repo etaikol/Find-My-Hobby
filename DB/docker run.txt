@@ -1,0 +1,14 @@
+docker run -d `
+  --name postgresdb `
+  -e POSTGRES_PASSWORD=123456 `
+  -v ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql `
+  -p 5432:5432 `
+  -v "C:\Users\ekol4\Desktop\FindMyHobby\Backup\db:/var/lib/postgresql/data" `
+  postgres:17-alpine `
+ -c logging_collector=on
+
+docker compose -f db.yml up -d
+
+docker exec -it -u postgres postgresdb psql
+
+docker logs -f postgresdb
