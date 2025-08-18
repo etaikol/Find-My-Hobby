@@ -1,9 +1,14 @@
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import React, { useEffect, useState } from "react";
 
-function App() {
+import Navbar from "./Navbar";
+import Register from "./Register";  // import your new Register page
+
+function Home() {
   const [count, setCount] = useState(0)
   const [message, setMessage] = useState("");
 
@@ -42,8 +47,27 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* Link to Register Page */}
+      <Link to="/register">
+        <button>Go to Register</button>
+      </Link>
     </>
   )
+}
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+      <div className="p-6">
+      <Routes>
+        <Route path="/" element={<Home />} /> 
+        <Route path="/register" element={<Register />} />
+      </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App
