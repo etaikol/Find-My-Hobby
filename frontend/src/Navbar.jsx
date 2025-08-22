@@ -1,6 +1,9 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const userRole = localStorage.getItem("userRole");
+
   return (
     <nav className="bg-gray-900 text-white px-6 py-4 shadow-lg flex justify-between items-center">
       {/* Left side brand/logo */}
@@ -17,17 +20,25 @@ function Navbar() {
           Home
         </Link>
         <Link
+          to="/login"
+          className="hover:text-blue-400 transition-colors duration-200"
+        >
+          Login
+        </Link>
+        <Link
           to="/register"
           className="hover:text-blue-400 transition-colors duration-200"
         >
           Register
         </Link>
-        <Link
-          to="/managedashboard"
-          className="hover:text-blue-400 transition-colors duration-200"
-        >
+        {userRole === "admin" && (
+          <Link
+            to="/managedashboard"
+            className="hover:text-blue-400 transition-colors duration-200"
+          >
           Users Dashboard
-        </Link>
+          </Link>
+        )}
       </div>
     </nav>
   );

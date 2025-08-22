@@ -6,8 +6,10 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import Navbar from "./Navbar";
+import Login from "./Login";
 import Register from "./Register";  // import your new Register page
 import Managedashboard from "./Managedashboard";
+
 
 function Home() {
   const [count, setCount] = useState(0)
@@ -64,6 +66,7 @@ function App() {
       <div className="p-6">
       <Routes>
         <Route path="/" element={<Home />} /> 
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/managedashboard" element={<Managedashboard />} />
       </Routes>

@@ -20,6 +20,7 @@ const Managedashboard = () => {
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@ const Managedashboard = () => {
               <td>{user.id}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
+              <td>{user.role}</td>
             </tr>
           ))}
         </tbody>
