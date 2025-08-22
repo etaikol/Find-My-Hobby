@@ -5,33 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b682092-1928-457c-84b6-1f06559603c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/misc_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/FindMyHobby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/FindMyHobby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/1249" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/1249" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/1259" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/1259" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/16388" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/16388" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2604" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2604" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2608" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2608" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2656" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2656" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2657" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2657" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2658" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2658" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2659" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2659" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2673" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2673" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/2674" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/2674" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/pg_wal/000000010000000000000001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/JUNK/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Managedashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Managedashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JUNK/routes.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755017614877</updated>
       <workItem from="1755017616264" duration="177000" />
-      <workItem from="1755889531614" duration="1719000" />
+      <workItem from="1755889531614" duration="2316000" />
     </task>
     <servers />
   </component>
