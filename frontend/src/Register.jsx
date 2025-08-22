@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BACKEND_BASE_URL } from "./config";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ function Register() {
     console.log("Register form submitted:", formData);
 
     try {
-      const response = await fetch("http://localhost:5000/auth/register", {
+      const response = await fetch(`${BACKEND_BASE_URL}auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

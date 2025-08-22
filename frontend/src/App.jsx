@@ -7,6 +7,7 @@ import './App.css'
 
 import Navbar from "./Navbar";
 import Register from "./Register";  // import your new Register page
+import Managedashboard from "./Managedashboard";
 
 function Home() {
   const [count, setCount] = useState(0)
@@ -64,6 +65,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/register" element={<Register />} />
+        <Route path="/managedashboard" element={<Managedashboard />} />
       </Routes>
       </div>
     </Router>
