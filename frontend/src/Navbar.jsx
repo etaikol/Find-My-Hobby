@@ -22,6 +22,12 @@ function Navbar() {
         >
           Register
         </Link>
+        <Link
+          to="/managedashboard"
+          className="hover:text-blue-400 transition-colors duration-200"
+        >
+          Users Dashboard
+        </Link>
       </div>
     </nav>
   );
