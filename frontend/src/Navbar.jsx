@@ -1,43 +1,40 @@
-import React from "react";
+// src/Navbar.jsx
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthContext.jsx";  // ✅ import context
 
 function Navbar() {
-  const userRole = localStorage.getItem("userRole");
+  const { userRole, logout } = useContext(AuthContext); // ✅ get live role + logout
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 shadow-lg flex justify-between items-center">
-      {/* Left side brand/logo */}
-      <div className="text-xl font-bold">
-        <Link to="/">Find My Hobby</Link>
+    <nav className="p-4 bg-gray-900 text-white flex justify-between">
+      <div className="flex space-x-4">
+        <Link to="/" className="hover:text-blue-400">Home</Link>
+        
+        {/* ✅ Only show for admins */}
+        {userRole === "admin" && (
+          <Link to="/managedashboard" className="hover:text-blue-400">
+            Users Dashboard
+          </Link>
+        )}
       </div>
 
-      {/* Right side links */}
-      <div className="space-x-6">
-        <Link
-          to="/"
-          className="hover:text-blue-400 transition-colors duration-200"
-        >
-          Home
-        </Link>
-        <Link
-          to="/login"
-          className="hover:text-blue-400 transition-colors duration-200"
-        >
-          Login
-        </Link>
-        <Link
-          to="/register"
-          className="hover:text-blue-400 transition-colors duration-200"
-        >
-          Register
-        </Link>
-        {userRole === "admin" && (
-          <Link
-            to="/managedashboard"
-            className="hover:text-blue-400 transition-colors duration-200"
-          >
-          Users Dashboard
-          </Link>
+      <div>
+        {userRole ? (
+          <>
+            <span className="mr-4">Role: {userRole}</span>
+            <button 
+              onClick={logout} 
+              className="hover:text-red-400"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="hover:text-blue-400 mr-4">Login</Link>
+            <Link to="/register" className="hover:text-blue-400">Register</Link>
+          </>
         )}
       </div>
     </nav>

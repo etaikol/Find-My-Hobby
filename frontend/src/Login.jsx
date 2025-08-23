@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_BASE_URL } from "./config";
+import { AuthContext } from "./AuthContext.jsx";   // ✅ import
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -9,8 +10,8 @@ function Login() {
   });
 
   const [responseMessage, setResponseMessage] = useState("");
-  const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);   // ✅ use login function
 
   const handleChange = (e) => {
     setFormData({
@@ -19,7 +20,6 @@ function Login() {
     });
   };
 
-  // ✅ make handleSubmit async
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login attempted:", formData);
@@ -30,19 +30,20 @@ function Login() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData) // send JSON
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
       
       if (response.ok) {
         setResponseMessage(data.message);
+
         // Fetch user details to get role
         const userRes = await fetch(`${BACKEND_BASE_URL}users/${data.id}`);
         const userData = await userRes.json();
-        setUserRole(userData.role);
-        
-        localStorage.setItem("userRole", userData.role);
+
+        login(userData.role);   // ✅ updates AuthContext (Navbar refreshes!)
+
         // Redirect to homepage
         navigate("/");
       } else {

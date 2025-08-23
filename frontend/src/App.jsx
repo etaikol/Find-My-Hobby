@@ -1,28 +1,27 @@
+// src/App.jsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 import Navbar from "./Navbar";
 import Login from "./Login";
-import Register from "./Register";  // import your new Register page
+import Register from "./Register";
 import Managedashboard from "./Managedashboard";
-
+import { AuthProvider } from "./AuthContext.jsx";   // ✅ import
 
 function Home() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/test")
-      .then(response => response.text())  // get plain text, not JSON
-    .then(text => setMessage(text))     // directly set message from text
-    .catch(error => console.error("Error fetching message:", error));
-}, []);
-
-
+      .then((response) => response.text())
+      .then((text) => setMessage(text))
+      .catch((error) => console.error("Error fetching message:", error));
+  }, []);
 
   return (
     <>
@@ -35,10 +34,10 @@ function Home() {
         </a>
       </div>
       <h1>Vite + React</h1>
-    <div>
-     <h1>Message from Flask Backend:</h1>
-     <p>{message}</p>
-    </div>
+      <div>
+        <h1>Message from Flask Backend:</h1>
+        <p>{message}</p>
+      </div>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -56,23 +55,25 @@ function Home() {
         <button>Go to Register</button>
       </Link>
     </>
-  )
+  );
 }
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <div className="p-6">
-      <Routes>
-        <Route path="/" element={<Home />} /> 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/managedashboard" element={<Managedashboard />} />
-      </Routes>
-      </div>
-    </Router>
+    <AuthProvider>   {/* ✅ Wrap the whole app */}
+      <Router>
+        <Navbar />
+        <div className="p-6">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/managedashboard" element={<Managedashboard />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
-export default App
+export default App;
