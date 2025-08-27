@@ -1,0 +1,13 @@
+2025-08-16 16:44:44.946 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+2025-08-16 16:44:44.947 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-08-16 16:44:44.947 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-08-16 16:44:44.957 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-08-16 16:44:44.999 UTC [30] LOG:  database system was shut down at 2025-08-15 17:39:14 UTC
+2025-08-16 16:44:45.082 UTC [1] LOG:  database system is ready to accept connections
+2025-08-16 16:45:09.509 UTC [1] LOG:  received fast shutdown request
+2025-08-16 16:45:09.530 UTC [1] LOG:  aborting any active transactions
+2025-08-16 16:45:09.570 UTC [1] LOG:  background worker "logical replication launcher" (PID 33) exited with exit code 1
+2025-08-16 16:45:09.576 UTC [28] LOG:  shutting down
+2025-08-16 16:45:09.592 UTC [28] LOG:  checkpoint starting: shutdown immediate
+2025-08-16 16:45:09.958 UTC [28] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.048 s, sync=0.012 s, total=0.383 s; sync files=2, longest=0.008 s, average=0.006 s; distance=0 kB, estimate=0 kB; lsn=0/1571B70, redo lsn=0/1571B70
+2025-08-16 16:45:10.018 UTC [1] LOG:  database system is shut down
