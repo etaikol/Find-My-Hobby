@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_BASE_URL } from "./config";
+import { API_URL } from "./config";
 import { AuthContext } from "./AuthContext.jsx";   // ✅ import
 
 function Login() {
@@ -25,7 +25,7 @@ function Login() {
     console.log("Login attempted:", formData);
 
     try {
-      const response = await fetch(`${BACKEND_BASE_URL}auth/login`, {
+      const response = await fetch(`${API_URL}auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -39,7 +39,7 @@ function Login() {
         setResponseMessage(data.message);
 
         // Fetch user details to get role
-        const userRes = await fetch(`${BACKEND_BASE_URL}users/${data.id}`);
+        const userRes = await fetch(`${API_URL}users/${data.id}`);
         const userData = await userRes.json();
 
         login(userData.role);   // ✅ updates AuthContext (Navbar refreshes!)

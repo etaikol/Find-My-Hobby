@@ -17,7 +17,7 @@ function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/test")
+    fetch(`${API_URL}auth/test`)
       .then((response) => response.text())
       .then((text) => setMessage(text))
       .catch((error) => console.error("Error fetching message:", error));

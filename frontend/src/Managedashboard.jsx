@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BACKEND_BASE_URL } from "./config";
+import { API_URL } from "./config";
 
 const Managedashboard = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${BACKEND_BASE_URL}/users`)
+    fetch(`${API_URL}/users`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error("Error fetching users:", err));

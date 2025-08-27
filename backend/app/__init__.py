@@ -19,12 +19,11 @@ def create_app():
     )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-
+    print(app)
     # Extensions
     db.init_app(app)
     migrate.init_app(app, db)
     CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)  # 👈 allows React frontend to access Flask APIs
-
     # Import models
     from . import models
 
@@ -32,6 +31,7 @@ def create_app():
     from .routes import all_blueprints
     for bp in all_blueprints:
         app.register_blueprint(bp)
+        print(bp)
 
 
     return app

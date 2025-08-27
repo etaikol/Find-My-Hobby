@@ -7,8 +7,21 @@ docker run -d `
   postgres:17-alpine `
  -c logging_collector=on
 
-docker compose -f db.yml up -d
+docker compose -f docker-compose.yml -p findmyhobby up -d
 
 docker exec -it -u postgres postgresdb psql
 
 docker logs -f postgresdb
+
+
+
+
+
+
+UPDATE users
+SET role = 'admin'
+WHERE username = 'oranzabot';
+
+
+ALTER TABLE users
+ADD COLUMN role VARCHAR(255) DEFAULT 'user';
