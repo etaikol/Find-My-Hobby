@@ -1,0 +1,28 @@
+2025-08-22 16:15:02.852 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+2025-08-22 16:15:02.852 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-08-22 16:15:02.852 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-08-22 16:15:02.859 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-08-22 16:15:02.924 UTC [31] LOG:  database system was interrupted; last known up at 2025-08-18 14:43:42 UTC
+2025-08-22 16:15:05.802 UTC [38] FATAL:  the database system is starting up
+2025-08-22 16:15:10.889 UTC [45] FATAL:  the database system is starting up
+2025-08-22 16:15:11.443 UTC [31] LOG:  database system was not properly shut down; automatic recovery in progress
+2025-08-22 16:15:11.502 UTC [31] LOG:  redo starts at 0/1572230
+2025-08-22 16:15:11.504 UTC [31] LOG:  invalid record length at 0/1572338: expected at least 24, got 0
+2025-08-22 16:15:11.504 UTC [31] LOG:  redo done at 0/1572300 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2025-08-22 16:15:11.663 UTC [29] LOG:  checkpoint starting: end-of-recovery immediate wait
+2025-08-22 16:15:11.727 UTC [29] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.006 s, total=0.069 s; sync files=2, longest=0.004 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/1572338, redo lsn=0/1572338
+2025-08-22 16:15:11.741 UTC [1] LOG:  database system is ready to accept connections
+2025-08-22 16:23:59.863 UTC [776] LOG:  could not send data to client: Broken pipe
+2025-08-22 16:23:59.863 UTC [776] FATAL:  connection to client lost
+2025-08-22 16:24:06.216 UTC [783] LOG:  could not send data to client: Broken pipe
+2025-08-22 16:24:06.216 UTC [783] FATAL:  connection to client lost
+2025-08-22 17:32:20.296 UTC [6319] ERROR:  syntax error at or near "/" at character 1
+2025-08-22 17:32:20.296 UTC [6319] STATEMENT:  /dt
+	ALTER TABLE users
+	ADD COLUMN role VARCHAR(255) NOT NULL DEFAULT 'user';
+2025-08-22 17:35:12.687 UTC [29] LOG:  checkpoint starting: time
+2025-08-22 17:35:13.808 UTC [29] LOG:  checkpoint complete: wrote 11 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.052 s, sync=0.009 s, total=1.122 s; sync files=11, longest=0.003 s, average=0.001 s; distance=50 kB, estimate=50 kB; lsn=0/157EC08, redo lsn=0/157EB78
+2025-08-22 17:50:13.055 UTC [29] LOG:  checkpoint starting: time
+2025-08-22 17:50:13.214 UTC [29] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.114 s, sync=0.004 s, total=0.159 s; sync files=2, longest=0.003 s, average=0.002 s; distance=1 kB, estimate=45 kB; lsn=0/157F040, redo lsn=0/157EFE8
+2025-08-22 19:40:14.656 UTC [29] LOG:  checkpoint starting: time
+2025-08-22 19:40:15.026 UTC [29] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.329 s, sync=0.005 s, total=0.371 s; sync files=4, longest=0.003 s, average=0.002 s; distance=1 kB, estimate=40 kB; lsn=0/157F670, redo lsn=0/157F618
