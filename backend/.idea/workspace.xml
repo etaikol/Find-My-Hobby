@@ -5,21 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b682092-1928-457c-84b6-1f06559603c3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/logging_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backup/db/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/base/5/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backup/db/current_logfiles" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/current_logfiles" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backup/db/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backup/db/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/global/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/log/postgresql-2025-08-27_173040.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/log/postgresql-2025-08-27_173040.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backup/db/pg_stat/pgstat.stat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backup/db/pg_wal/000000010000000000000004" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/pg_wal/000000010000000000000004" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backup/db/postmaster.pid" beforeDir="false" afterPath="$PROJECT_DIR$/../Backup/db/postmaster.pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
     <envs>
@@ -49,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "5-docker-compose-backend-frontend",
+    "git-widget-placeholder": "feature/api-logging",
     "last_opened_file_path": "C:/Users/ekol4/Desktop/FindMyHobby/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -85,11 +98,22 @@
       <workItem from="1755970092239" duration="2453000" />
       <workItem from="1756047826166" duration="2815000" />
       <workItem from="1756141771480" duration="968000" />
-      <workItem from="1756307536824" duration="7981000" />
+      <workItem from="1756307536824" duration="8578000" />
+      <workItem from="1756403069396" duration="5975000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/routes/auth.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
