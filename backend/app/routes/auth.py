@@ -2,8 +2,10 @@ from flask import Blueprint, jsonify, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User
 from app import db
+import logging
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+logger = logging.getLogger(__name__)   # 👈 logger specific to this file
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
@@ -14,6 +16,12 @@ def register():
 
     if User.query.filter_by(email=data["email"]).first():
         return jsonify({"error": "Email already registered"}), 409
+
+    logger.info(
+        "Registering user with username=%s, email=%s",
+        data["username"],
+        data["email"]
+    )
 
     new_user = User(
         username=data["username"],

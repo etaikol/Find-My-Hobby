@@ -50,6 +50,8 @@ services:
         condition: service_healthy
     volumes:
     - ./backend:/app
+    command: gunicorn -b 0.0.0.0:5000 "app:create_app()"
+    
   frontend:
     container_name: react-frontend
     build: ./frontend
@@ -58,7 +60,6 @@ services:
         - "5173:5173"
     depends_on:
         - backend
-
 
 volumes:
   pgadmin_data:
