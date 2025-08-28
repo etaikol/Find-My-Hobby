@@ -6,6 +6,8 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
+import {API_URL} from "./config"
+
 import Navbar from "./Navbar";
 import Login from "./Login";
 import Register from "./Register";
@@ -17,7 +19,7 @@ function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch(`${API_URL}auth/test`)
+    fetch(`${API_URL}test`)
       .then((response) => response.text())
       .then((text) => setMessage(text))
       .catch((error) => console.error("Error fetching message:", error));
