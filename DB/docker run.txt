@@ -13,6 +13,7 @@ docker exec -it -u postgres postgresdb psql
 
 docker logs -f postgresdb
 
+docker exec -t postgresdb pg_dumpall -U postgres > db_backup.sql        # create a db backup
 
 
 
