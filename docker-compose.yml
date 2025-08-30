@@ -16,7 +16,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./Backup/db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     command: -c logging_collector=on
 
   pgadmin:
@@ -68,3 +68,4 @@ services:
 
 volumes:
   pgadmin_data:
+  postgres_data:
