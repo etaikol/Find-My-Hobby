@@ -1,11 +1,10 @@
-# frontend/Dockerfile
-FROM node:20-alpine
+# frontend/Dockerfile.dev
+FROM node:20
 
 WORKDIR /app
 
-# Install dependencies (will be cached unless package.json changes)
 COPY package*.json ./
 RUN npm install
 
-# The actual code is mounted at runtime via volume for dev
+# Mount your source in docker-compose, so no need to COPY it here
 CMD ["npm", "run", "dev"]
