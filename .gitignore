@@ -1,3 +1,14 @@
+# Docker volumes
+/grafana_data/
+/prometheus_data/
+/postgres_data/
+/pgadmin_data/
+/promtail_positions/
+
+
+# local folders
+/monitor/loki/data/
+
 # -------------------------
 # Python / Flask (backend)
 # -------------------------
@@ -56,7 +67,6 @@ yarn-error.log*
 # -------------------------
 # Database
 # -------------------------
-Backup/              # 👈 ignore your local database folder
 *.sql
 *.dump
 
