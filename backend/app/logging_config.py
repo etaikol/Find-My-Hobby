@@ -1,7 +1,7 @@
 import logging
 import sys
 from pythonjsonlogger import jsonlogger
-
+import os
 
 class MaxLevelFilter(logging.Filter):
     """Filter out log records above a certain level (inclusive)."""
@@ -11,7 +11,6 @@ class MaxLevelFilter(logging.Filter):
 
     def filter(self, record):
         return record.levelno <= self.max_level
-
 
 def setup_logging():
     root_logger = logging.getLogger()
@@ -33,7 +32,15 @@ def setup_logging():
     stderr_handler.setLevel(logging.ERROR)
     stderr_handler.setFormatter(json_formatter)
 
+    # File handler (all levels) — Promtail will tail this
+    log_dir = "/var/log/flask-backend"
+    os.makedirs(log_dir, exist_ok=True)
+    file_handler = logging.FileHandler(os.path.join(log_dir, "app.log"))
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(json_formatter)
+
     # Avoid duplicate handlers if setup_logging() called twice
     if not root_logger.handlers:
         root_logger.addHandler(stdout_handler)
         root_logger.addHandler(stderr_handler)
+        root_logger.addHandler(file_handler)
