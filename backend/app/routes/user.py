@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify
 from app.models import User
 
-main_bp = Blueprint("main", __name__)
+user_bp = Blueprint("user", __name__)
 
-@main_bp.route("/test")
+@user_bp.route("/test")
 def test():
     return {"message": "Backend is working with CORS enabled!"}
 
-@main_bp.route("/users", methods=["GET"])
+@user_bp.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
     return jsonify([{
@@ -17,7 +17,7 @@ def get_users():
         "role": u.role
     } for u in users])
 
-@main_bp.route("/users/<int:user_id>", methods=["GET"])
+@user_bp.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     user = User.query.get(user_id)
     if not user:
