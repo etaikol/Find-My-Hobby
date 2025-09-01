@@ -1,0 +1,34 @@
+{
+  "id": null,
+  "title": "Backend Logs Overview",
+  "tags": ["loki", "logs"],
+  "timezone": "browser",
+  "schemaVersion": 27,
+  "version": 1,
+  "panels": [
+    {
+      "title": "Flask App Logs",
+      "type": "logs",
+      "id": 1,
+      "datasource": { "type": "loki", "uid": "loki_ds" },
+      "targets": [{ "expr": "{job=\"flask-app\"}" }],
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 10 }
+    },
+    {
+      "title": "Gunicorn Logs",
+      "type": "logs",
+      "id": 2,
+      "datasource": { "type": "loki", "uid": "loki_ds" },
+      "targets": [{ "expr": "{job=\"gunicorn\"}" }],
+      "gridPos": { "x": 0, "y": 10, "w": 24, "h": 10 }
+    },
+    {
+      "title": "Access Logs",
+      "type": "logs",
+      "id": 3,
+      "datasource": { "type": "loki", "uid": "loki_ds" },
+      "targets": [{ "expr": "{job=\"access\"}" }],
+      "gridPos": { "x": 0, "y": 20, "w": 24, "h": 10 }
+    }
+  ]
+}

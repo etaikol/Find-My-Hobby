@@ -1,0 +1,25 @@
+{
+  "id": null,
+  "title": "App Logs",
+  "tags": ["loki", "logs"],
+  "timezone": "browser",
+  "schemaVersion": 27,
+  "version": 1,
+  "panels": [
+    {
+      "title": "Backend Logs",
+      "type": "logs",
+      "id": 1,
+      "datasource": {
+        "type": "loki",
+        "uid": "loki_ds"
+      },
+      "targets": [
+        {
+          "expr": "{job=\"flask-backend\"}"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 10 }
+    }
+  ]
+}

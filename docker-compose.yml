@@ -33,7 +33,7 @@ services:
       - db
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-      - ./DB/servers.json:/pgadmin4/servers.json
+      - ./db/servers.json:/pgadmin4/servers.json:ro
 
   backend:
     container_name: flask-backend
@@ -48,24 +48,101 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       - ./backend:/app
-    command: gunicorn -b 0.0.0.0:5000 "app:create_app()"
-    
+      - ./logs/backend:/var/log/flask-backend
+    command: >
+      gunicorn -b 0.0.0.0:5000 "app:create_app()"
+      --access-logfile -
+      --error-logfile -
+      --log-level info
+
+
   frontend:
     container_name: react-frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile    # 👈 use dev Dockerfile
+      dockerfile: Dockerfile
     restart: always
     ports:
-      - "5173:5173"                 # expose Vite dev server
+      - "5173:5173"
     volumes:
-      - ./frontend:/app             # mount code for hot reload
-      - /app/node_modules           # prevent overwriting node_modules
+      - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
+
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: loki
+    command: -config.file=/etc/loki/loki-config.yml   # match name below
+    ports:
+      - "3100:3100"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3100/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./monitor/loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - ./monitor/loki/data:/loki   # bind mount host dirs into container
+
+  promtail:
+    image: grafana/promtail:2.9.0
+    container_name: promtail
+    volumes:
+      - ./monitor/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./logs/backend:/var/log/flask-backend
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      loki:
+        condition: service_healthy
+
+
+
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana   # 🔥 persistent DB & dashboards
+      - ./monitor/grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - loki
+      
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./monitor/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+
+  pg_exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: pg_exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "postgresql://postgres:postgres@db:5432/postgres?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - db
+
 
 volumes:
   pgadmin_data:
   postgres_data:
+  grafana_data:
+  promtail_positions:
+  prometheus_data:
