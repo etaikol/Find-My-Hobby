@@ -1,17 +1,24 @@
 // src/Navbar.jsx
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./AuthContext.jsx";  // ✅ import context
+import { AuthContext } from "./AuthContext.jsx";
 
 function Navbar() {
-  const {userId, userName, userRole, logout } = useContext(AuthContext); // ✅ get live role + logout
+  const { userId, userName, userRole, logout } = useContext(AuthContext);
 
   return (
     <nav className="p-4 bg-gray-900 text-white flex justify-between">
       <div className="flex space-x-4">
         <Link to="/" className="hover:text-blue-400">Home</Link>
-        
-        {/* ✅ Only show for admins */}
+
+        {/* ✅ Only for logged-in users */}
+        {userId && (
+          <Link to="/profile" className="hover:text-blue-400">
+            Profile
+          </Link>
+        )}
+
+        {/* ✅ Only for admins */}
         {userRole === "admin" && (
           <Link to="/managedashboard" className="hover:text-blue-400">
             Users Dashboard
@@ -22,10 +29,10 @@ function Navbar() {
       <div>
         {userId ? (
           <>
-            <span className="mr-4">Welcome: {userName}</span>
-            <span className="mr-4">Role: {userRole}</span>
-            <button 
-              onClick={logout} 
+            <span className="mr-4">Welcome: {userName}</span><br />
+            <span className="mr-4">Role: {userRole}</span><br />
+            <button
+              onClick={logout}
               className="hover:text-red-400"
             >
               Logout

@@ -7,6 +7,14 @@ junction_bp = Blueprint("junction", __name__)
 # -------------------------
 # User <-> Hobby
 # -------------------------
+@junction_bp.route("/users/<int:user_id>/hobbies", methods=["GET"])
+def get_user_hobbies(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify([{"id": h.id, "name": h.name} for h in user.hobbies])
+
 @junction_bp.route("/users/<int:user_id>/hobbies", methods=["POST"])
 def add_user_hobby(user_id):
     data = request.json

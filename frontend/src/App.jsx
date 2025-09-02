@@ -13,6 +13,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Managedashboard from "./Managedashboard";
 import { AuthProvider } from "./AuthContext.jsx";   // ✅ import
+import Profile from "./Profile.jsx";
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -71,6 +72,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/managedashboard" element={<Managedashboard />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </Router>

@@ -42,7 +42,7 @@ function Login() {
         const userRes = await fetch(`${API_URL}users/${data.id}`);
         const userData = await userRes.json();
 
-        login(userData.id, userData.username, userData.role);   // ✅ updates AuthContext (Navbar refreshes!)
+        login(userData.id, userData.username, userData.role, userData.email);   // ✅ updates AuthContext (Navbar refreshes!)
 
         // Redirect to homepage
         navigate("/");
