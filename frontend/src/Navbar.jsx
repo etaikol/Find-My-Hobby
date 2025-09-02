@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext.jsx";  // ✅ import context
 
 function Navbar() {
-  const { userRole, logout } = useContext(AuthContext); // ✅ get live role + logout
+  const {userId, userName, userRole, logout } = useContext(AuthContext); // ✅ get live role + logout
 
   return (
     <nav className="p-4 bg-gray-900 text-white flex justify-between">
@@ -20,8 +20,9 @@ function Navbar() {
       </div>
 
       <div>
-        {userRole ? (
+        {userId ? (
           <>
+            <span className="mr-4">Welcome: {userName}</span>
             <span className="mr-4">Role: {userRole}</span>
             <button 
               onClick={logout} 
