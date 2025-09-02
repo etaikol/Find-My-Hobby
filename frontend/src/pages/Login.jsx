@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "./config";
-import { AuthContext } from "./AuthContext.jsx";   // ✅ import
+import { API_URL } from "../utils/config.js";
+import { AuthContext } from "../context/AuthContext.jsx";   // ✅ import
 
 function Login() {
   const [formData, setFormData] = useState({
