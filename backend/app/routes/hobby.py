@@ -27,7 +27,7 @@ def create_hobby():
     hobby = Hobby(name=name)
     db.session.add(hobby)
     db.session.commit()
-    return jsonify({"id": hobby.id, "name": hobby.name, ""}), 201
+    return jsonify({"id": hobby.id, "name": hobby.name}), 201
 
 # Assign hobby to a user
 @hobby_bp.route("/users/<int:user_id>/hobbies", methods=["POST"])
