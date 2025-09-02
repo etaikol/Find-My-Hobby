@@ -1,7 +1,7 @@
 // src/components/Profile.jsx
-import { API_URL } from "./config";
+import { API_URL } from "../utils/config";
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Profile() {
   const { userId, userName, userRole, userMail } = useContext(AuthContext);

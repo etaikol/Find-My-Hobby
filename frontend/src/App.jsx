@@ -6,14 +6,15 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import {API_URL} from "./config"
+import {API_URL} from "./utils/config.js"
 
-import Navbar from "./Navbar";
-import Login from "./Login";
-import Register from "./Register";
-import Managedashboard from "./Managedashboard";
-import { AuthProvider } from "./AuthContext.jsx";   // ✅ import
-import Profile from "./Profile.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register";
+import Managedashboard from "./pages/Managedashboard";
+import { AuthProvider } from "./context/AuthContext.jsx";   // ✅ import
+import Profile from "./pages/Profile.jsx";
+import AddHobby from "./pages/AddHobby.jsx";
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -73,6 +74,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/managedashboard" element={<Managedashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/add-hobby" element={<AddHobby />} />
           </Routes>
         </div>
       </Router>

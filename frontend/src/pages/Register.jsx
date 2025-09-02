@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { API_URL } from "./config";
+import { API_URL } from "../utils/config";
 
 function Register() {
   const [formData, setFormData] = useState({
