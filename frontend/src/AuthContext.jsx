@@ -12,9 +12,9 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const storedId = localStorage.getItem("userId");
-    if (storedId) setUserName(storedId);
+    if (storedId) setUserId(storedId);
     const storedName = localStorage.getItem("userName");
-    if (storedName) setUserId(storedName);
+    if (storedName) setUserName(storedName);
     const storedRole = localStorage.getItem("userRole");
     if (storedRole) setUserRole(storedRole);
     const storedMail = localStorage.getItem("userMail");
