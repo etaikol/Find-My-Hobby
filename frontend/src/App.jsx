@@ -1,61 +1,61 @@
 // src/App.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import {API_URL} from "./config"
+import {API_URL} from "./utils/config.js"
 
-import Navbar from "./Navbar";
-import Login from "./Login";
-import Register from "./Register";
-import Managedashboard from "./Managedashboard";
-import { AuthProvider } from "./AuthContext.jsx";   // ✅ import
+import Navbar from "./components/Navbar.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register";
+import Managedashboard from "./pages/Managedashboard";
+import { AuthProvider, AuthContext } from "./context/AuthContext.jsx";   // ✅ import
+import Profile from "./pages/Profile.jsx";
+import AddHobby from "./pages/AddHobby.jsx";
+import AddGroup from "./pages/AddGroup.jsx";
+import GroupShow from "./components/GroupShow.jsx";
+import ShowGroup from "./pages/ShowGroup.jsx";
+import GroupList from "./components/GroupList.jsx";
+
+import EventShow from "./pages/EventShow.jsx";
 
 function Home() {
-  const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("");
+  const { userId } = useContext(AuthContext);
+  const [groups, setGroups] = useState([]);
+
+const fetchGroups = async () => {
+    try {
+      const res = await fetch(`${API_URL}/groups`);
+      const data = await res.json();
+      if (res.ok) setGroups(data);
+    } catch (err) {
+      console.error("Error fetching groups:", err);
+    }
+  };
 
   useEffect(() => {
-    fetch(`${API_URL}test`)
-      .then((response) => response.text())
-      .then((text) => setMessage(text))
-      .catch((error) => console.error("Error fetching message:", error));
+    fetchGroups();
   }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div>
-        <h1>Message from Flask Backend:</h1>
-        <p>{message}</p>
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1 className="text-3xl font-bold underline">Welcome to FindMyHobby!</h1>
+      <h2>It's time to find a Hobby</h2>
 
-      {/* Link to Register Page */}
-      <Link to="/register">
-        <button>Go to Register</button>
+      {userId ? (
+      <Link to="/add-group" className="text-blue-500 underline">
+        Create a Group
       </Link>
+      ) : (
+      <Link to="/login" className="text-blue-500 underline">
+        Login to create a Group
+      </Link>
+      )}
+      
+      <GroupList groups={groups} onJoin={fetchGroups} />
     </>
   );
 }
@@ -71,6 +71,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/managedashboard" element={<Managedashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/add-hobby" element={<AddHobby />} />
+            <Route path="/add-group" element={<AddGroup />} />
+            <Route path="/groups/:id" element={<ShowGroup />} />
+            <Route path="/events/:id" element={<EventShow />} />
           </Routes>
         </div>
       </Router>

@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b682092-1928-457c-84b6-1f06559603c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/routes/event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/hobby.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/junction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/GroupShow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/GroupShow.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "9-table-backend-routes",
+    "git-widget-placeholder": "events-components-implementation",
     "last_opened_file_path": "C:/Users/ekol4/Desktop/FindMyHobby/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -93,6 +90,8 @@
       <workItem from="1756403069396" duration="5975000" />
       <workItem from="1756571838985" duration="2096000" />
       <workItem from="1756748647101" duration="3730000" />
+      <workItem from="1756832320833" duration="984000" />
+      <workItem from="1756916313414" duration="6231000" />
     </task>
     <servers />
   </component>

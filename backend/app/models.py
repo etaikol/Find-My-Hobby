@@ -38,6 +38,7 @@ class Group(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     members = db.relationship("User", secondary="group_members", back_populates="groups")
+    creator = db.relationship("User", backref="created_groups", foreign_keys=[creator_id])  # ✅
 
 # Events
 class Event(db.Model):
