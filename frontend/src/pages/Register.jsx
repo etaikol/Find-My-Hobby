@@ -1,25 +1,11 @@
 import React, { useState } from "react";
 import { API_URL } from "../utils/config";
+import RegisterForm from "../components/RegisterForm";
 
 function Register() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
-
   const [responseMessage, setResponseMessage] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  // ✅ make handleSubmit async
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRegister = async (formData) => {
     console.log("Register form submitted:", formData);
 
     try {
@@ -42,31 +28,7 @@ function Register() {
   return (
     <div>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        /><br /><br />
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        /><br /><br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        /><br /><br />
-        <button type="submit">Register</button>
-      </form>
-
+      <RegisterForm onSubmit={handleRegister} />
       {responseMessage && <p>{responseMessage}</p>}
     </div>
   );

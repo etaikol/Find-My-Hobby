@@ -17,6 +17,7 @@ function HobbyTable({ hobbies }) {
         ))}
       </tbody>
     </table>
+    
   );
 }
 export default HobbyTable;
