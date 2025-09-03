@@ -2,12 +2,14 @@
 import { API_URL } from "../utils/config";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { userId, userName, userRole, userMail } = useContext(AuthContext);
   const [userHobbies, setUserHobbies] = useState([]);
   const [allHobbies, setAllHobbies] = useState([]);
   const [selectedHobby, setSelectedHobby] = useState("");
+  const [userGroups, setUserGroups] = useState([]);
 
   // fetch hobbies for this user
   const fetchUserHobbies = async () => {
@@ -20,6 +22,18 @@ export default function Profile() {
       console.error(err);
     }
   };
+
+  const fetchUserGroups = async () => {
+  try {
+    const res = await fetch(`${API_URL}users/${userId}/groups`);
+    if (!res.ok) throw new Error("Failed to fetch user groups");
+    const groups = await res.json();
+    setUserGroups(groups);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   // fetch all hobbies
   const fetchAllHobbies = async () => {
@@ -54,6 +68,7 @@ export default function Profile() {
     if (userId) {
       fetchUserHobbies();
       fetchAllHobbies();
+      fetchUserGroups();
     }
   }, [userId]);
 
@@ -63,6 +78,21 @@ export default function Profile() {
       <p className="text-gray-600">
         {userMail} — <span className="italic">{userRole}</span>
       </p>
+      <h2 className="text-xl font-semibold mt-6 mb-2">My Groups</h2>
+      <ul className="list-disc ml-6">
+        {userGroups.length > 0 ? (
+          userGroups.map((g) => (
+            <li key={g.id}>
+              <strong><Link to={"/groups/" + g.id}>{g.name}</Link></strong> – {g.description}
+              <span className="text-gray-500">
+                {" "} (creator: {g.creator?.username})
+              </span>
+            </li>
+          ))
+        ) : (
+          <p>No groups yet</p>
+        )}
+      </ul>
 
       {/* User Hobbies Table */}
       <h2 className="text-xl font-semibold mt-6 mb-2">My Hobbies</h2>

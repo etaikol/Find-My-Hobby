@@ -3,10 +3,6 @@ from app.models import User
 
 user_bp = Blueprint("user", __name__)
 
-@user_bp.route("/test")
-def test():
-    return {"message": "Backend is working with CORS enabled!"}
-
 @user_bp.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
@@ -28,3 +24,26 @@ def get_user(user_id):
         "email": user.email,
         "role": user.role
     })
+
+# Get all groups a user belongs to
+@user_bp.route("/users/<int:user_id>/groups", methods=["GET"])
+def get_user_groups(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    groups = []
+    for g in user.groups:
+        groups.append({
+            "id": g.id,
+            "name": g.name,
+            "description": g.description,
+            "creator": {
+                "id": g.creator.id,
+                "username": g.creator.username
+            } if hasattr(g, "creator") and g.creator else None,
+            "created_at": g.created_at.isoformat()
+        })
+
+    return jsonify(groups)
+

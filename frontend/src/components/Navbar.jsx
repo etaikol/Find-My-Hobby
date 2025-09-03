@@ -1,10 +1,16 @@
 // src/Navbar.jsx
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 
 function Navbar() {
   const { userId, userName, userRole, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <nav className="p-4 bg-gray-900 text-white flex justify-between">
@@ -32,7 +38,7 @@ function Navbar() {
             <span className="mr-4">Welcome: {userName}</span><br />
             <span className="mr-4">Role: {userRole}</span><br />
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="hover:text-red-400"
             >
               Logout
