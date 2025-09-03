@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/config.js";
 import { AuthContext } from "../context/AuthContext.jsx";   // ✅ import
 
@@ -75,6 +75,9 @@ function Login() {
         /><br /><br />
         <button type="submit">Login</button>
       </form>
+      <Link to="/register">
+      Don't have an account? Register here!
+      </Link>
 
       {responseMessage && <p>{responseMessage}</p>}
     </div>

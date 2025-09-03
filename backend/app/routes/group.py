@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import text
+
 from app.models import db, Group, User
 
 group_bp = Blueprint("group", __name__)
@@ -7,7 +9,17 @@ group_bp = Blueprint("group", __name__)
 @group_bp.route("/groups", methods=["GET"])
 def get_groups():
     groups = Group.query.all()
-    return jsonify([{"id": g.id, "name": g.name, "description": g.description} for g in groups])
+    return jsonify([{"id": group.id,
+                     "name": group.name,
+                     "description": group.description,
+                     "creator": {
+                         "id": group.creator.id,
+                         "username": group.creator.username
+                     },
+                     "members": [{
+                        "id": member.id,
+                        "username": member.username} for member in group.members]}
+                    for group in groups])
 
 # Get single group
 @group_bp.route("/groups/<int:group_id>", methods=["GET"])
@@ -19,7 +31,13 @@ def get_group(group_id):
         "id": group.id,
         "name": group.name,
         "description": group.description,
-        "members": [{"id": m.id, "username": m.username} for m in group.members]
+        "creator": {
+            "id": group.creator.id,
+            "username": group.creator.username
+        },
+        "members": [{
+            "id": m.id,
+            "username": m.username} for m in group.members],
     })
 
 # Create a group
@@ -35,7 +53,22 @@ def create_group():
     group = Group(name=name, description=description, creator_id=creator_id)
     db.session.add(group)
     db.session.commit()
-    return jsonify({"id": group.id, "name": group.name, "description": group.description}), 201
+    group.members.append(creator)  # add creator as a member
+    db.session.commit()
+
+    # now update role in the junction table
+    db.session.execute(
+        text("UPDATE group_members SET role='owner' WHERE group_id=:gid AND user_id=:uid"),
+        {"gid": group.id, "uid": creator.id}
+    )
+    db.session.commit()
+
+    return jsonify({
+        "id": group.id,
+        "name": group.name,
+        "description": group.description,
+        "creator": {"id": creator.id, "username": creator.username}
+    }), 201
 
 # Add member to group
 @group_bp.route("/groups/<int:group_id>/members", methods=["POST"])
@@ -50,7 +83,7 @@ def add_group_member(group_id):
     group.members.append(user)
     # Set role in association table
     db.session.execute(
-        "UPDATE group_members SET role=:role WHERE group_id=:gid AND user_id=:uid",
+        text("UPDATE group_members SET role=:role WHERE group_id=:gid AND user_id=:uid"),
         {"role": role, "gid": group_id, "uid": user_id}
     )
     db.session.commit()
