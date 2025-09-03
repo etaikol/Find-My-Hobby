@@ -29,6 +29,17 @@ def add_user_hobby(user_id):
         db.session.commit()
     return jsonify({"message": f"Hobby '{hobby.name}' added to user '{user.username}'"})
 
+@junction_bp.route("/users/<int:user_id>/hobbies/<int:hobby_id>", methods=["DELETE"])
+def remove_user_hobby(user_id, hobby_id):
+    user = User.query.get(user_id)
+    hobby = Hobby.query.get(hobby_id)
+    if not user or not hobby:
+        return jsonify({"error": "User or hobby not found"}), 404
+    if hobby in user.hobbies:
+        user.hobbies.remove(hobby)
+        db.session.commit()
+        return jsonify({"message": "Hobby removed"})
+    return jsonify({"error": "Hobby not found for this user"}), 404
 
 # -------------------------
 # Group <-> User
