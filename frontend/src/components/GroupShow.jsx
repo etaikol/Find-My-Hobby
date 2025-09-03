@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../utils/config";
+import GroupEvents from "./GroupEvents";
 
 const GroupShow = () => {
   const { id } = useParams();
@@ -46,6 +47,7 @@ const GroupShow = () => {
           <p>No members yet</p>
         )}
       </ul>
+      <GroupEvents groupId={group.id} creatorId={group.creator.id} />
     </div>
   );
 };

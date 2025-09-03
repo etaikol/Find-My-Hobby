@@ -20,6 +20,8 @@ import GroupShow from "./components/GroupShow.jsx";
 import ShowGroup from "./pages/ShowGroup.jsx";
 import GroupList from "./components/GroupList.jsx";
 
+import EventShow from "./pages/EventShow.jsx";
+
 function Home() {
   const { userId } = useContext(AuthContext);
   const [groups, setGroups] = useState([]);
@@ -73,6 +75,7 @@ function App() {
             <Route path="/add-hobby" element={<AddHobby />} />
             <Route path="/add-group" element={<AddGroup />} />
             <Route path="/groups/:id" element={<ShowGroup />} />
+            <Route path="/events/:id" element={<EventShow />} />
           </Routes>
         </div>
       </Router>
