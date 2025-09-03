@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, Event, User, Hobby, Group
+from datetime import datetime
 
 event_bp = Blueprint("event", __name__)
 
@@ -16,6 +17,41 @@ def get_events():
         "creator_id": e.creator_id
     } for e in events])
 
+# Get single event by id
+@event_bp.route("/events/<int:event_id>", methods=["GET"])
+def get_event(event_id):
+    event = Event.query.get(event_id)
+    if not event:
+        return jsonify({"error": "Event not found"}), 404
+
+    return jsonify({
+        "id": event.id,
+        "title": event.title,
+        "description": event.description,
+        "start_time": event.start_time.isoformat() if event.start_time else None,
+        "end_time": event.end_time.isoformat() if event.end_time else None,
+        "creator_id": event.creator_id,
+        "creator_username": event.creator.username,
+        "group_id": event.group_id,
+        "visibility": event.visibility
+    })
+
+# Get events for a group
+@event_bp.route("/groups/<int:group_id>/events", methods=["GET"])
+def get_group_events(group_id):
+    events = Event.query.filter_by(group_id=group_id).all()
+    return jsonify([
+        {
+            "id": e.id,
+            "title": e.title,
+            "description": e.description,
+            "start_time": e.start_time,
+            "end_time": e.end_time,
+            "creator_id": e.creator_id,
+            "visibility": e.visibility,
+        }
+        for e in events
+    ])
 
 # Create event
 @event_bp.route("/events", methods=["POST"])
@@ -23,10 +59,14 @@ def create_event():
     data = request.json
     title = data.get("title")
     creator_id = data.get("creator_id")
-    start_time = data.get("start_time")
-    end_time = data.get("end_time")
     group_id = data.get("group_id")
     visibility = data.get("visibility", "public")
+
+    start_time_str = data.get("start_time")
+    end_time_str = data.get("end_time")
+
+    start_time = datetime.fromisoformat(start_time_str) if start_time_str else None
+    end_time = datetime.fromisoformat(end_time_str) if end_time_str else None
 
     event = Event(
         title=title,
