@@ -28,7 +28,7 @@ function Home() {
 
 const fetchGroups = async () => {
     try {
-      const res = await fetch(`${API_URL}/groups`);
+      const res = await fetch(`${API_URL}groups`);
       const data = await res.json();
       if (res.ok) setGroups(data);
     } catch (err) {

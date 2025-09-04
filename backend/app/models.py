@@ -48,7 +48,7 @@ class Event(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
     creator_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    group_id = db.Column(db.Integer, db.ForeignKey("groups.id"))
+    group_id = db.Column(db.Integer, db.ForeignKey("groups.id"), nullable=True)  # <- ADD THIS
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)
     visibility = db.Column(db.String(50))
@@ -56,6 +56,8 @@ class Event(db.Model):
 
     attendees = db.relationship("User", secondary="event_attendees", backref="events_attending")
     hobbies = db.relationship("Hobby", secondary="event_hobbies", back_populates="events")
+    group = db.relationship("Group", backref="events")
+
 
 # Junction Tables
 class UserHobbies(db.Model):

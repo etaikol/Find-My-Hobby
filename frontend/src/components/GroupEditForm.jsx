@@ -18,7 +18,7 @@ const GroupEditForm = ({ group, onUpdated }) => {
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await fetch(`${API_URL}/groups/${group.id}`, {
+      const res = await fetch(`${API_URL}groups/${group.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

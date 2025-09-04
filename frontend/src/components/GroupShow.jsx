@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/config";
 import { AuthContext } from "../context/AuthContext";
 import GroupEditForm from "./GroupEditForm";
+import GroupEvents from "./GroupEvents";
+import EventCreateForm from "./EventCreateForm";
 
 const GroupShow = () => {
   const { id } = useParams();
@@ -17,7 +19,7 @@ const GroupShow = () => {
     const fetchGroup = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${API_URL}/groups/${id}`);
+        const res = await fetch(`${API_URL}groups/${id}`);
         const data = await res.json();
         if (res.ok) setGroup(data);
         else setError(data.error || "Failed to load group");
@@ -33,7 +35,7 @@ const GroupShow = () => {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this group?")) return;
     try {
-      const res = await fetch(`${API_URL}/groups/${id}`, {
+      const res = await fetch(`${API_URL}groups/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ current_user_id: userId, current_user_role: userRole }),
@@ -81,6 +83,8 @@ const GroupShow = () => {
           ? group.members.map((m) => <li key={m.id}>{m.username}</li>)
           : <p>No members yet</p>}
       </ul>
+      <GroupEvents groupId={group.id} />
+      {canEdit && <EventCreateForm groupId={group.id} userId={userId} onCreated={() => {}} />}
     </div>
   );
 };
