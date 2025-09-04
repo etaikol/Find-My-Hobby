@@ -22,7 +22,7 @@ const AddGroupForm = ({ onSuccess }) => {
     e.preventDefault();
     try {
       const payload = { ...formData, creator_id: userId };
-      const res = await fetch(`${API_URL}/groups`, {
+      const res = await fetch(`${API_URL}groups`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

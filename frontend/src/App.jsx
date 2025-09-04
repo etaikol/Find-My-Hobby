@@ -19,7 +19,7 @@ import AddGroup from "./pages/AddGroup.jsx";
 import GroupShow from "./components/GroupShow.jsx";
 import ShowGroup from "./pages/ShowGroup.jsx";
 import GroupList from "./components/GroupList.jsx";
-
+import PublicProfile from "./pages/PublicProfile.jsx";
 import EventShow from "./pages/EventShow.jsx";
 
 function Home() {
@@ -28,7 +28,7 @@ function Home() {
 
 const fetchGroups = async () => {
     try {
-      const res = await fetch(`${API_URL}/groups`);
+      const res = await fetch(`${API_URL}groups`);
       const data = await res.json();
       if (res.ok) setGroups(data);
     } catch (err) {
@@ -72,6 +72,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/managedashboard" element={<Managedashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/users/:userId" element={<PublicProfile />} />
             <Route path="/add-hobby" element={<AddHobby />} />
             <Route path="/add-group" element={<AddGroup />} />
             <Route path="/groups/:id" element={<ShowGroup />} />
