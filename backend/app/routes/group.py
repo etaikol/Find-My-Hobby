@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy import text
-
 from app.models import db, Group, User
 
 group_bp = Blueprint("group", __name__)
@@ -40,6 +39,40 @@ def get_group(group_id):
             "username": m.username} for m in group.members],
     })
 
+# Update a group (owner or admin can update)
+@group_bp.route("/groups/<int:group_id>", methods=["PUT"])
+def update_group(group_id):
+    group = Group.query.get(group_id)
+    if not group:
+        return jsonify({"error": "Group not found"}), 404
+
+    data = request.json
+    current_user_id = data.get("current_user_id")
+    current_user_role = data.get("current_user_role", "user")
+
+    # Only owner or admin can update
+    if group.creator_id != current_user_id and current_user_role != "admin":
+        return jsonify({"error": "Only the group owner or an admin can update settings"}), 403
+
+    # Update fields
+    group.name = data.get("name", group.name)
+    group.description = data.get("description", group.description)
+    db.session.commit()
+
+    # Return full group including members
+    return jsonify({
+        "id": group.id,
+        "name": group.name,
+        "description": group.description,
+        "creator": {
+            "id": group.creator.id,
+            "username": group.creator.username
+        },
+        "members": [
+            {"id": m.id, "username": m.username} for m in group.members
+        ]
+    })
+
 # Create a group
 @group_bp.route("/groups", methods=["POST"])
 def create_group():
@@ -69,6 +102,33 @@ def create_group():
         "description": group.description,
         "creator": {"id": creator.id, "username": creator.username}
     }), 201
+
+# -----------------------------
+# DELETE group (owner or admin)
+# -----------------------------
+@group_bp.route("/groups/<int:group_id>", methods=["DELETE"])
+def delete_group(group_id):
+    group = Group.query.get(group_id)
+    if not group:
+        return jsonify({"error": "Group not found"}), 404
+
+    # Expect current_user_id and current_user_role in request body
+    data = request.json or {}
+    current_user_id = data.get("current_user_id")
+    current_user_role = data.get("current_user_role", "")
+
+    if not current_user_id:
+        return jsonify({"error": "User ID required"}), 400
+
+    # Check permission: owner or admin
+    if group.creator_id != current_user_id and current_user_role != "admin":
+        return jsonify({"error": "Permission denied"}), 403
+
+    # Delete group
+    db.session.delete(group)
+    db.session.commit()
+
+    return jsonify({"message": f"Group '{group.name}' deleted successfully"})
 
 # Add member to group
 @group_bp.route("/groups/<int:group_id>/members", methods=["POST"])
