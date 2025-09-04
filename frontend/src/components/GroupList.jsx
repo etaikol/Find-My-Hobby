@@ -28,33 +28,43 @@ function GroupList({ groups, onJoin }) {
   };
 
   return (
-    <table className="w-full mt-4 border">
-      <thead>
-        <tr>
-          <th>Name</th><th>Description</th><th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {groups.map((g) => (
-          <tr key={g.id}>
-            <td><Link to={"/groups/" + g.id}>{g.name}</Link></td>
-            <td>{g.description}</td>
-            <td>
-            {userId ? (
-              <button
-                onClick={() => handleJoin(g.id)}
-                className="bg-green-500 text-white px-3 py-1 rounded"
-              >
-                Join
-              </button>
-            ) : (
-              <span className="text-gray-500"><Link to={"/login"}>Login to join</Link></span>
-            )}
-            </td>
+    <div className="table-responsive mt-4">
+      <table className="table table-striped table-hover align-middle">
+        <thead className="table-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col" style={{ width: "150px" }}>Action</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {groups.map((g) => (
+            <tr key={g.id}>
+              <td>
+                <Link to={`/groups/${g.id}`} className="text-decoration-none fw-bold">
+                  {g.name}
+                </Link>
+              </td>
+              <td>{g.description}</td>
+              <td>
+                {userId ? (
+                  <button
+                    onClick={() => handleJoin(g.id)}
+                    className="btn btn-sm btn-success"
+                  >
+                    Join
+                  </button>
+                ) : (
+                  <Link to="/login" className="text-muted fst-italic">
+                    Login to join
+                  </Link>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

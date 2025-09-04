@@ -35,13 +35,17 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <LoginForm onSubmit={handleLogin} />
+  <div className="container mt-5" style={{ maxWidth: "400px" }}>
+    <h1 className="mb-4 text-center">Login</h1>
+    <LoginForm onSubmit={handleLogin} />
+    <div className="mt-3 text-center">
       <Link to="/register">Don’t have an account? Register here!</Link>
-      {responseMessage && <p>{responseMessage}</p>}
     </div>
-  );
+    {responseMessage && (
+      <p className="alert alert-info mt-3">{responseMessage}</p>
+    )}
+  </div>
+);
 }
 
 export default Login;

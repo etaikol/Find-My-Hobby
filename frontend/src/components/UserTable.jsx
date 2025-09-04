@@ -12,7 +12,7 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
   };
 
   const cancelEditing = () => {
-    if (isSaving) return; // prevent cancel during save
+    if (isSaving) return;
     setEditingId(null);
     setFormData({});
   };
@@ -38,10 +38,14 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
   };
 
   return (
-    <table border="1" cellPadding="8" cellSpacing="0" className="w-full">
-      <thead>
+    <table className="table table-bordered table-hover w-100">
+      <thead className="table-light">
         <tr>
-          <th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Actions</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -55,7 +59,7 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
                   onChange={(e) =>
                     setFormData({ ...formData, username: e.target.value })
                   }
-                  className="border p-1"
+                  className="form-control form-control-sm"
                   disabled={isSaving}
                 />
               </td>
@@ -65,7 +69,7 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="border p-1"
+                  className="form-control form-control-sm"
                   disabled={isSaving}
                 />
               </td>
@@ -75,29 +79,25 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
                   onChange={(e) =>
                     setFormData({ ...formData, role: e.target.value })
                   }
-                  className="border p-1"
+                  className="form-select form-select-sm"
                   disabled={isSaving}
                 >
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
                 </select>
               </td>
-              <td>
+              <td className="d-flex gap-2">
                 <button
                   onClick={saveEditing}
                   disabled={isSaving}
-                  className={`${
-                    isSaving
-                      ? "bg-gray-300"
-                      : "bg-blue-500 hover:bg-blue-600"
-                  } text-white px-2 py-1 mr-2 rounded`}
+                  className={`btn btn-primary btn-sm`}
                 >
                   {isSaving ? "Saving..." : "Save"}
                 </button>
                 <button
                   onClick={cancelEditing}
                   disabled={isSaving}
-                  className="bg-gray-400 text-white px-2 py-1 rounded"
+                  className="btn btn-secondary btn-sm"
                 >
                   Cancel
                 </button>
@@ -106,19 +106,21 @@ function UserTable({ users, onUpdateUser, onDeleteUser }) {
           ) : (
             <tr key={u.id}>
               <td>{u.id}</td>
-              <td><Link to={"/users/" + u.id}>{u.username}</Link></td>
+              <td>
+                <Link to={"/users/" + u.id}>{u.username}</Link>
+              </td>
               <td>{u.email}</td>
               <td>{u.role}</td>
-              <td className="flex gap-2">
+              <td className="d-flex gap-2">
                 <button
                   onClick={() => startEditing(u)}
-                  className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
+                  className="btn btn-warning btn-sm"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => confirmDelete(u)}
-                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                  className="btn btn-danger btn-sm"
                 >
                   Delete
                 </button>

@@ -37,17 +37,17 @@ function AddUserHobbyForm({ userId, userHobbies, onAdded }) {
   }, []);
 
   return (
-    <div className="mt-6">
-      <h3 className="text-lg font-medium mb-2">Add a Hobby</h3>
-      <div className="flex gap-2">
+    <div className="mt-4">
+      <h5 className="mb-3">Add a Hobby</h5>
+      <div className="d-flex gap-2">
         <select
           value={selectedHobby}
           onChange={(e) => setSelectedHobby(e.target.value)}
-          className="border p-2 rounded flex-grow"
+          className="form-select flex-grow-1"
         >
           <option value="">Select a hobby...</option>
           {allHobbies
-            .filter((h) => !userHobbies.some((uh) => uh.id === h.id)) // exclude already added
+            .filter((h) => !userHobbies.some((uh) => uh.id === h.id))
             .map((h) => (
               <option key={h.id} value={h.id}>
                 {h.name}
@@ -56,7 +56,8 @@ function AddUserHobbyForm({ userId, userHobbies, onAdded }) {
         </select>
         <button
           onClick={handleAdd}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="btn btn-primary flex-shrink-0"
+          disabled={!selectedHobby}
         >
           Add
         </button>

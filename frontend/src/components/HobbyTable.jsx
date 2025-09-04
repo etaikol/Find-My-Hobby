@@ -1,10 +1,13 @@
-// src/components/HobbyTable.jsx
+import React from "react";
+
 function HobbyTable({ hobbies }) {
   return (
-    <table border="1" cellPadding="8" cellSpacing="0">
-      <thead>
+    <table className="table table-bordered table-hover w-100">
+      <thead className="table-light">
         <tr>
-          <th>ID</th><th>Name</th><th>Description</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody>
@@ -17,7 +20,7 @@ function HobbyTable({ hobbies }) {
         ))}
       </tbody>
     </table>
-    
   );
 }
+
 export default HobbyTable;
