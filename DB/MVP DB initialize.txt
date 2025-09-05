@@ -1,0 +1,67 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+	role VARCHAR(255) NOT NULL DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Hobbies table
+CREATE TABLE hobbies (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Groups table
+CREATE TABLE groups (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    creator_id INT NOT NULL REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- User_Hobbies table (many-to-many between users and hobbies)
+CREATE TABLE user_hobbies (
+    user_id INT NOT NULL REFERENCES users(id),
+    hobby_id INT NOT NULL REFERENCES hobbies(id),
+    PRIMARY KEY(user_id, hobby_id)
+);
+
+-- Group_Members table (many-to-many between users and groups)
+CREATE TABLE group_members (
+    user_id INT NOT NULL REFERENCES users(id),
+    group_id INT NOT NULL REFERENCES groups(id),
+    role VARCHAR(50),
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(user_id, group_id)
+);
+
+-- Events table
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    creator_id INT NOT NULL REFERENCES users(id),
+    group_id INT REFERENCES groups(id),
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    visibility VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Event_Attendees table (many-to-many between users and events)
+CREATE TABLE event_attendees (
+    event_id INT NOT NULL REFERENCES events(id),
+    user_id INT NOT NULL REFERENCES users(id),
+    status VARCHAR(50),
+    PRIMARY KEY(event_id, user_id)
+);
+
+-- Event_Hobbies table (many-to-many between events and hobbies)
+CREATE TABLE event_hobbies (
+    event_id INT NOT NULL REFERENCES events(id),
+    hobby_id INT NOT NULL REFERENCES hobbies(id),
+    PRIMARY KEY(event_id, hobby_id)
+);

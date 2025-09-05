@@ -1,0 +1,61 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml   # make sure this exists on host and is mounted
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # 1. Flask app structured logs (JSON)
+  - job_name: flask-app
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: flask-app
+          __path__: /var/log/flask-backend/app.log
+    pipeline_stages:
+      - json:
+          expressions:
+            asctime: asctime
+            logger: name
+            level: levelname
+            msg: message
+      - timestamp:
+          source: asctime
+          format: "2006-01-02 15:04:05,000"
+      - labels:
+          level:
+          logger:
+
+  # 2. Gunicorn logs
+  - job_name: gunicorn
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: gunicorn
+          __path__: /var/log/flask-backend/gunicorn.log
+    pipeline_stages:
+      - regex:
+          expression: '^\[(?P<ts>[^]]+)\] \[(?P<pid>\d+)\] \[(?P<level>[A-Z]+)\]\s*(?P<msg>.*)'
+      - labels:
+          level:
+          pid:
+
+  # 3. Access logs
+  - job_name: access
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: access
+          __path__: /var/log/flask-backend/access.log
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<client_ip>\S+) - - \[(?P<ts>[^\]]+)\] "(?P<method>\S+) (?P<uri>\S+) \S+" (?P<status>\d{3}) (?P<size>\d+)'
+      - labels:
+          client_ip:
+          method:
+          uri:
+          status:
