@@ -9,9 +9,13 @@ export default function GroupEvents({ groupId, creatorId }) {
   const [events, setEvents] = useState([]);
 
   const fetchEvents = async () => {
-    const res = await fetch(`${API_URL}groups/${groupId}/events`);
-    const data = await res.json();
-    setEvents(data);
+    try {
+      const res = await fetch(`${API_URL}groups/${groupId}/events`);
+      const data = await res.json();
+      setEvents(data);
+    } catch (err) {
+      console.error("Failed to fetch events:", err);
+    }
   };
 
   useEffect(() => {
@@ -21,28 +25,35 @@ export default function GroupEvents({ groupId, creatorId }) {
   const isOwner = creatorId === userId;
 
   return (
-    <div className="mt-6">
-      <h3 className="text-lg font-semibold mb-2">Group Events</h3>
+    <div className="mt-4">
+      <h3 className="mb-3">Group Events</h3>
+
       {events.length > 0 ? (
-        <ul className="space-y-2">
+        <div className="row g-3">
           {events.map((ev) => (
-            <li key={ev.id} className="border p-2 rounded">
-              <Link
-                to={`/events/${ev.id}`}
-                className="font-bold text-blue-600 hover:underline"
-              >
-                {ev.title}
-              </Link>
-              <p>{ev.description}</p>
-            </li>
+            <div key={ev.id} className="col-md-6">
+              <div className="card h-100 shadow-sm">
+                <div className="card-body">
+                  <Link
+                    to={`/events/${ev.id}`}
+                    className="card-title h5 text-primary text-decoration-none"
+                  >
+                    {ev.title}
+                  </Link>
+                  <p className="card-text mt-2">{ev.description}</p>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No events yet</p>
+        <p className="text-muted">No events yet.</p>
       )}
 
       {isOwner && (
-        <EventCreateForm groupId={groupId} onCreated={fetchEvents} />
+        <div className="mt-4">
+          <EventCreateForm groupId={groupId} onCreated={fetchEvents} />
+        </div>
       )}
     </div>
   );

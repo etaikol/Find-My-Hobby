@@ -2,37 +2,39 @@ import React from "react";
 
 function UserHobbyList({ hobbies, onRemove }) {
   return (
-    <table className="w-full border border-gray-300">
-      <thead>
-        <tr className="bg-gray-100">
-          <th className="p-2 text-left">Name</th>
-          <th className="p-2 text-left"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {hobbies.length > 0 ? (
-          hobbies.map((hobby) => (
-            <tr key={hobby.id} className="border-t">
-              <td className="p-2">{hobby.name}</td>
-              <td className="p-2">
-                <button
-                  onClick={() => onRemove(hobby.id)}
-                  className="text-red-500 hover:text-red-700 font-bold"
-                >
-                  ✕
-                </button>
+    <div className="table-responsive">
+      <table className="table table-bordered table-hover align-middle">
+        <thead className="table-light">
+          <tr>
+            <th>Name</th>
+            <th style={{ width: "80px" }}></th>
+          </tr>
+        </thead>
+        <tbody>
+          {hobbies.length > 0 ? (
+            hobbies.map((hobby) => (
+              <tr key={hobby.id}>
+                <td>{hobby.name}</td>
+                <td>
+                  <button
+                    onClick={() => onRemove(hobby.id)}
+                    className="btn btn-sm btn-danger"
+                  >
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="2" className="text-center text-muted">
+                No hobbies yet
               </td>
             </tr>
-          ))
-        ) : (
-          <tr>
-            <td className="p-2 text-center" colSpan="3">
-              No hobbies yet
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

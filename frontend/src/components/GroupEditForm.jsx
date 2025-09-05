@@ -2,17 +2,22 @@ import React, { useState, useContext } from "react";
 import { API_URL } from "../utils/config";
 import { AuthContext } from "../context/AuthContext";
 
-const GroupEditForm = ({ group, onUpdated }) => {
+const GroupEditForm = ({ group, onUpdated, onDelete }) => {
   const { userId, userRole } = useContext(AuthContext);
 
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [formData, setFormData] = useState({ name: group.name, description: group.description });
+  const [formData, setFormData] = useState({
+    name: group.name,
+    description: group.description,
+  });
 
-  const canEdit = Number(group.creator.id) === Number(userId) || userRole === "admin";
+  const canEdit =
+    Number(group.creator.id) === Number(userId) || userRole === "admin";
   if (!canEdit) return null;
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +34,7 @@ const GroupEditForm = ({ group, onUpdated }) => {
       });
       const data = await res.json();
       if (res.ok) {
-        onUpdated(data); // update parent with returned group
+        onUpdated(data);
         setEditing(false);
       } else {
         alert(data.error || "Failed to update group");
@@ -44,44 +49,73 @@ const GroupEditForm = ({ group, onUpdated }) => {
 
   if (!editing) {
     return (
-      <button
-        onClick={() => setEditing(true)}
-        className="mt-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-      >
-        Edit Group
-      </button>
+      <div className="d-flex align-items-center gap-2 mt-2">
+        <button
+          onClick={() => setEditing(true)}
+          className="btn btn-warning flex-shrink-0"
+        >
+          Edit
+        </button>
+        {onDelete && (
+          <button
+            onClick={() =>
+              window.confirm("Are you sure you want to delete this group?")
+                ? onDelete(group.id)
+                : null
+            }
+            className="btn btn-danger flex-shrink-0"
+          >
+            Delete
+          </button>
+        )}
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-3 space-y-2 border p-3 rounded bg-gray-50">
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        className="block w-full border p-2"
-        disabled={saving}
-      />
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        className="block w-full border p-2"
-        disabled={saving}
-      />
-      <div className="flex gap-2">
+    <form onSubmit={handleSubmit} className="card card-body mt-3 shadow-sm">
+      <div className="mb-3">
+        <label htmlFor="name" className="form-label fw-bold">
+          Group Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="form-control"
+          disabled={saving}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label fw-bold">
+          Description
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          className="form-control"
+          rows="3"
+          disabled={saving}
+        />
+      </div>
+
+      <div className="d-flex gap-2">
         <button
           type="submit"
+          className="btn btn-primary"
           disabled={saving}
-          className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
         >
           {saving ? "Saving..." : "Save"}
         </button>
         <button
           type="button"
           onClick={() => setEditing(false)}
-          className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
+          className="btn btn-secondary"
           disabled={saving}
         >
           Cancel

@@ -26,12 +26,14 @@ function Register() {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <RegisterForm onSubmit={handleRegister} />
-      {responseMessage && <p>{responseMessage}</p>}
-    </div>
-  );
+  <div className="container mt-5" style={{ maxWidth: "400px" }}>
+    <h1 className="mb-4 text-center">Register</h1>
+    <RegisterForm onSubmit={handleRegister} />
+    {responseMessage && (
+      <p className="alert alert-info mt-3">{responseMessage}</p>
+    )}
+  </div>
+);
 }
 
 export default Register;

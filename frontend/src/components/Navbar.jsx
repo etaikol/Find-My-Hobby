@@ -13,43 +13,78 @@ function Navbar() {
   };
 
   return (
-    <nav className="p-4 bg-gray-900 text-white flex justify-between">
-      <div className="flex space-x-4">
-        <Link to="/" className="hover:text-blue-400">Home</Link>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+      <Link className="navbar-brand" to="/">
+        Find My Hobby
+      </Link>
 
-        {/* ✅ Only for logged-in users */}
-        {userId && (
-          <Link to="/profile" className="hover:text-blue-400">
-            Profile
-          </Link>
-        )}
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
 
-        {/* ✅ Only for admins */}
-        {userRole === "admin" && (
-          <Link to="/managedashboard" className="hover:text-blue-400">
-            Users Dashboard
-          </Link>
-        )}
-      </div>
+      <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
 
-      <div>
-        {userId ? (
-          <>
-            <span className="mr-4">Welcome: {userName}</span><br />
-            <span className="mr-4">Role: {userRole}</span><br />
-            <button
-              onClick={handleLogout}
-              className="hover:text-red-400"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="hover:text-blue-400 mr-4">Login</Link>
-            <Link to="/register" className="hover:text-blue-400">Register</Link>
-          </>
-        )}
+          {userId && (
+            <li className="nav-item">
+              <Link to="/profile" className="nav-link">
+                Profile
+              </Link>
+            </li>
+          )}
+
+          {userRole === "admin" && (
+            <li className="nav-item">
+              <Link to="/managedashboard" className="nav-link">
+                Users Dashboard
+              </Link>
+            </li>
+          )}
+        </ul>
+
+        <ul className="navbar-nav">
+          {userId ? (
+            <>
+              <li className="nav-item me-3 text-light">
+                Welcome: <strong>{userName}</strong>
+              </li>
+              <li className="nav-item me-3 text-light">
+                Role: <strong>{userRole}</strong>
+              </li>
+              <li className="nav-item">
+                <button onClick={handleLogout} className="btn btn-outline-danger btn-sm">
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/register" className="nav-link">
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
     </nav>
   );
