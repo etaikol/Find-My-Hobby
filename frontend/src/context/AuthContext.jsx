@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [userName, setUserName] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [userMail, setUserMail] = useState(null);
-
+  const [jwtToken, setJwtToken] = useState(null); 
 
   useEffect(() => {
     const storedId = localStorage.getItem("userId");
@@ -19,19 +19,22 @@ export function AuthProvider({ children }) {
     if (storedRole) setUserRole(storedRole);
     const storedMail = localStorage.getItem("userMail");
     if (storedMail) setUserMail(storedMail);
+    const storedToken = localStorage.getItem("jwtToken");
+    if (storedToken) setJwtToken(storedToken); 
   }, []);
 
-  const login = (id, name, role, email) => {
+  const login = (id, name, role, email, token) => {
     localStorage.setItem("userRole", role);
     localStorage.setItem("userName", name);
     localStorage.setItem("userId", id);
     localStorage.setItem("userMail", email);
+    localStorage.setItem("jwtToken", token);
 
     setUserId(id);
     setUserName(name);
-    setUserRole(role);   // ✅ this updates state immediately
+    setUserRole(role);
     setUserMail(email);
-
+    setJwtToken(token);
   };
 
   const logout = () => {
@@ -39,14 +42,17 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("userName");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userMail");
+    localStorage.removeItem("jwtToken");
+
     setUserId(null);
     setUserName(null);
     setUserRole(null);
     setUserMail(null);
+    setJwtToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{userId, userName, userRole, userMail, login, logout }}>
+    <AuthContext.Provider value={{userId, userName, userRole, userMail, jwtToken, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

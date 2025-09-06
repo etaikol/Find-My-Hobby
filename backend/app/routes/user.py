@@ -1,10 +1,16 @@
 from flask import Blueprint, jsonify, request
 from app.models import User, db
+from flask_jwt_extended import jwt_required
+import logging
 
 user_bp = Blueprint("user", __name__)
+logger = logging.getLogger(__name__)
 
 @user_bp.route("/users", methods=["GET"])
+@jwt_required()
 def get_users():
+    auth_header = request.headers.get("Authorization")
+    logger.info("Authorization header received: %s", auth_header)
     users = User.query.all()
     return jsonify([{
         "id": u.id,

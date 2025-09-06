@@ -21,9 +21,8 @@ function Login() {
 
       if (response.ok) {
         setResponseMessage(data.message);
-        const userRes = await fetch(`${API_URL}users/${data.id}`);
-        const userData = await userRes.json();
-        login(userData.id, userData.username, userData.role, userData.email);
+        const { token, user } = data;
+        login(user.id, user.username, user.role, user.email, token);
         navigate("/");
       } else {
         setResponseMessage(data.error || "Login failed");

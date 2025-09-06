@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b682092-1928-457c-84b6-1f06559603c3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/GroupEditForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/GroupEditForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/GroupShow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/GroupShow.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "28-manage-the-react-routes-tables",
+    "git-widget-placeholder": "17-jwt-backend-authentication-with-frontend-authcontext",
     "last_opened_file_path": "C:/Users/ekol4/Desktop/FindMyHobby/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -96,6 +95,7 @@
       <workItem from="1756832320833" duration="984000" />
       <workItem from="1756916313414" duration="6231000" />
       <workItem from="1757004276830" duration="8629000" />
+      <workItem from="1757180288483" duration="9278000" />
     </task>
     <servers />
   </component>
